@@ -1,0 +1,17 @@
+cloud:
+  aws:
+    region:
+      static: us-east-1
+      auto: false
+    stack:
+      auto: false
+    credentials:
+      secret-key: Izzppf9zNexQ1vvk/Qcwsirm8mSi46bXYCmt12vI
+      access-key: AKIA3GEHCRXU6OLJPGYW
+    endpoint:
+      url: https://sqs.us-west-1.amazonaws.com/769082428905/student-crud-queue
+
+
+
+server:
+  port:8080
