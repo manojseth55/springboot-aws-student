@@ -47,6 +47,20 @@ public class StudentRequestValidator {
 				error.setMetaData(metaData);
 				list.add(error);
 			}
+			if (StringUtils.isEmpty(student.getEmail())) {
+				error.setCode(MISSING);
+				error.setMessage("name must be not null");
+				metaData.setField("name");
+				error.setMetaData(metaData);
+				list.add(error);
+			}
+			if (StringUtils.isEmpty(student.getPhone())) {
+				error.setCode(MISSING);
+				error.setMessage("name must be not null");
+				metaData.setField("name");
+				error.setMetaData(metaData);
+				list.add(error);
+			}
 		}
 
 		return list.isEmpty() ? Optional.empty()
