@@ -34,7 +34,7 @@ public class StudentController {
 	private final S3Service s3Service;
 
 	@PostMapping(value = "/save", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> postStudent(@RequestBody Student student) {
+	public ResponseEntity<?> postStudent(@RequestBody Student student) throws Exception {
 		try {
 			log.info("event =postStudent, status=studentPayloadRecieved, body={}", student);
 			Optional<StudentErrorResponse> errorResponse = studentRequestValidator.studentValidateRequest(student);
