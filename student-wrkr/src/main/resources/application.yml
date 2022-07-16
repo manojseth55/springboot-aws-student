@@ -11,7 +11,12 @@ cloud:
     endpoint:
       url: https://sqs.us-west-1.amazonaws.com/769082428905/student-crud-queue
 
-
+logging:
+  level:
+    com:
+      amazonaws:
+        util:
+          EC2MetadataUtils: error
 
 server:
-  port: 8080
+  port: 8083

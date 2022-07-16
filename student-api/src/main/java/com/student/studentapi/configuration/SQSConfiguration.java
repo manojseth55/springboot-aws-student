@@ -28,7 +28,7 @@ public class SQSConfiguration {
 	private AmazonSQSAsync buildAmazonSQSAsync() {
 		return AmazonSQSAsyncClientBuilder
 				.standard()
-				.withRegion(Regions.US_EAST_1)
+				.withRegion(Regions.US_WEST_1)
 				.withCredentials(
 						new AWSStaticCredentialsProvider(
 								new BasicAWSCredentials(accessKey, secretKey))
