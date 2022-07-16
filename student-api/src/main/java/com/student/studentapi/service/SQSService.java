@@ -18,13 +18,13 @@ public class SQSService {
     @Value("${cloud.aws.endpoint.url}")
     private String endPoint;
 
-    public void publishMessageToQueue(String message, String StudentId) throws Exception {
+    public void publishMessageToQueue(String message, String studentId) throws Exception {
         try {
-            log.info("event=publishMessageToQueue, status=publishStart, studentId={}", StudentId);
+            log.info("event=publishMessageToQueue, status=publishStart, studentId={}", studentId);
             queueMessagingTemplate.send(endPoint, MessageBuilder.withPayload(message).build());
-            log.info("event=publishMessageToQueue, status=publishEnd, studentId={}", StudentId);
+            log.info("event=publishMessageToQueue, status=publishEnd, studentId={}", studentId);
         } catch (Exception e) {
-            log.info("event=publishMessageToQueue, status=publishFailed, studentId={}", StudentId);
+            log.info("event=publishMessageToQueue, status=publishFailed, studentId={}", studentId);
         }
     }
 

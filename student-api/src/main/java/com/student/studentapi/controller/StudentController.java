@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.student.studentapi.model.Student;
 import com.student.studentapi.model.StudentErrorResponse;
+import com.student.studentapi.service.S3Service;
 import com.student.studentapi.service.SQSService;
 import com.student.studentapi.utils.StudentRequestValidator;
 
@@ -30,6 +31,7 @@ public class StudentController {
 
 	private final StudentRequestValidator studentRequestValidator;
 	private final SQSService sqsService;
+	private final S3Service s3Service;
 
 	@PostMapping(value = "/save", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> postStudent(@RequestBody Student student) {
@@ -42,6 +44,7 @@ public class StudentController {
 				return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
 			} else {
 				student.setId(UUID.randomUUID().toString());
+				s3Service.writeToS3(new ObjectMapper().writeValueAsString(student), student.getId());
 				sqsService.publishMessageToQueue(new ObjectMapper().writeValueAsString(student), student.getId());
 				log.info("event =postStudent, status=studentControllerEnd, studentId={}", student.getId());
 				return ResponseEntity.status(HttpStatus.CREATED).body(student);

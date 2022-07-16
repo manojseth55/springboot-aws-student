@@ -24,7 +24,8 @@ public class StudentWrkrRoute {
     private static final String SQS_SCHEMA = "aws-sqs://";
     private static final String SQS_CLIENT_SUFFIX = "?amazonSQSClient=#amazonSQSClient";
 
-    private String studentSQSQueues = "student-crud-queue";
+    @Value("${cloud.aws.endpoint.queue-name}")
+    private String studentSQSQueues;
 
     @Value("${sqs.no.consumers:5}")
     private String numberOfConsumers;
@@ -72,7 +73,9 @@ public class StudentWrkrRoute {
                         .log(LoggingLevel.INFO, log, "event=studentWrkrRoute, status=studentWrkrRouteStart")
                         .log(LoggingLevel.INFO, log,
                                 "event=studentWrkrRoute, status=beforeProcessing, studentWrkrReceivedFromSQS=${body}")
-                        .process(studentWrkrProcessor).end();
+                        .process(studentWrkrProcessor)
+                        .log(LoggingLevel.INFO, log, "event=studentWrkrRoute, status=studentWrkrRouteEnd")
+                        .end();
 
             }
         };

@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Configuration;
 
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
-import com.amazonaws.regions.Regions;
 import com.amazonaws.services.sqs.AmazonSQSAsync;
 import com.amazonaws.services.sqs.AmazonSQSAsyncClientBuilder;
 
@@ -20,6 +19,10 @@ public class SQSConfiguration {
 	@Value("${cloud.aws.credentials.secret-key}")
 	private String secretKey;
 
+    @Value("${cloud.aws.region.static}")
+    private String region;
+
+    
 	@Bean
 	public QueueMessagingTemplate queueMessagingTemplate() {
 		return new QueueMessagingTemplate(buildAmazonSQSAsync());
@@ -28,7 +31,7 @@ public class SQSConfiguration {
 	private AmazonSQSAsync buildAmazonSQSAsync() {
 		return AmazonSQSAsyncClientBuilder
 				.standard()
-				.withRegion(Regions.US_WEST_1)
+				.withRegion(region)
 				.withCredentials(
 						new AWSStaticCredentialsProvider(
 								new BasicAWSCredentials(accessKey, secretKey))
