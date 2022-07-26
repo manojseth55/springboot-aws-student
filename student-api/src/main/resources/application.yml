@@ -6,10 +6,10 @@ cloud:
     stack:
       auto: false
     credentials:
-      secret-key: Izzppf9zNexQ1vvk/Qcwsirm8mSi46bXYCmt12vI
-      access-key: AKIA3GEHCRXU6OLJPGYW
+      secret-key: put your secret key here
+      access-key: put your access key here
     endpoint:
-      url: https://sqs.us-west-1.amazonaws.com/769082428905/student-crud-queue
+      url: put queue name here
     bucket:
       name: student-s3-bucket
 

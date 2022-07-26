@@ -43,10 +43,10 @@ public class StudentController {
 						HttpStatus.BAD_REQUEST, errorResponse);
 				return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
 			} else {
-				student.setId(UUID.randomUUID().toString());
-				s3Service.writeToS3(new ObjectMapper().writeValueAsString(student), student.getId());
-				sqsService.publishMessageToQueue(new ObjectMapper().writeValueAsString(student), student.getId());
-				log.info("event =postStudent, status=studentControllerEnd, studentId={}", student.getId());
+				student.setStudentId(UUID.randomUUID().toString());
+				s3Service.writeToS3(new ObjectMapper().writeValueAsString(student), student.getStudentId());
+				sqsService.publishMessageToQueue(new ObjectMapper().writeValueAsString(student), student.getStudentId());
+				log.info("event =postStudent, status=studentControllerEnd, studentId={}", student.getStudentId());
 				return ResponseEntity.status(HttpStatus.CREATED).body(student);
 			}
 		} catch (Exception e) {

@@ -23,9 +23,9 @@ public class StudentWrkrProcessor implements Processor {
         try {
             String request = exchange.getIn().getBody(String.class);
             Student student = new ObjectMapper().readValue(request, Student.class);
-            log.info("event=studentWrkrProcessor, status=processStart, studentId={}, studentData={}", student.getId(), student);
+            log.info("event=studentWrkrProcessor, status=processStart, studentId={}, studentData={}", student.getStudentId(), student);
             studentService.saveStudent(student);
-            log.info("event=studentWrkrProcessor, status=processEnd, studentId={}", student.getId());
+            log.info("event=studentWrkrProcessor, status=processEnd, studentId={}", student.getStudentId());
         } catch (Exception e) {
             log.info("event=studentWrkrProcessor, status=processFailed, exception={}, studentId={}", e);
         }
